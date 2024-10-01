@@ -8,8 +8,12 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link href="../../styles/internal.css" rel="stylesheet">
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
   <script src="../../scripts/bootstrap_setcolormode.js"></script>
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary d-print-none">
   <div class="container-lg">
@@ -36,6 +40,16 @@
         <li class="breadcrumb-item active" aria-current="page">Import JXL File</li>
       </ol>
     </nav>
+    <div class="my-2 p-1 rounded bg-body-tertiary border d-flex align-middle">
+      <span class="px-2"><i class="bi bi-asterisk" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Version command was created."></i></span>
+      <p class="p-0 m-0 my-auto align-middle">1.0</p>
+      <span class="ps-5 pe-2"><i class="bi bi-pen" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Version command was last updated."></i></span>
+      <p class="p-0 m-0 my-auto align-middle">1.0</p>
+    </div>
+    <div class="my-3 p-2 rounded bg-warning border border-warning d-flex align-middle" style="--bs-bg-opacity: .3;">
+      <span class="pe-2"><i class="bi bi-exclamation-diamond text-warning fs-4"></i></span>
+      <p class="p-0 m-0 my-auto align-middle">This command is a work in progress. Features marked as &quot;Planned Feature&quot; are not implimented and subject to change.</p>
+    </div>
     <div>
       <p>The <span class="autocad-command">ImportJxlFile</span> command allows the technician to directly import Trimble&copy; raw data file. The technician will then be able to do a multitude of tasks with minimal input, including:</p>
       <ul>
@@ -79,15 +93,15 @@
             <td>If enabled, the attributes measured in the field will be added directly after the code. For example, a point with the code BLDG1 OHG will be imported as “BLDG1 (CBS 1) OHG.” The raw code will still be available in the point properties.</td>
           </tr>
           <tr>
-            <th scope="row">Assign points to layers based on detected FXL files</th>
+            <th scope="row">Assign points to layers based on detected FXL files <span class="badge text-bg-warning">Planned Feature</span></th>
             <td>If enabled, the points will be assigned to layers based on the FXL indicated as active in the JXL file. If the layer does not exist in the current drawing, information from the FXL file will be used to create the layer.</td>
           </tr>
           <tr>
-            <th scope="row">Add blocks onto each point based on detected FXL files</th>
+            <th scope="row">Add blocks onto each point based on detected FXL files <span class="badge text-bg-warning">Planned Feature</span></th>
             <td>If enabled, each point with a definable block will get said block created on top of, but not connected to, the point. If the block does not exist in the drawing, the program will search through the block inventory database to determine if a block can be imported. If a block cannot be imported, this will be communicated in the import report generated at the end of the process.</td>
           </tr>
           <tr>
-            <th scope="row">Do you want to put the imported points into a group</th>
+            <th scope="row">Do you want to put the imported points into a group <span class="badge text-bg-warning">Planned Feature</span></th>
             <td><b>No Point Group:</b> No point group will be created.<br>
               <b>Add to Existing:</b> A combo box will appear with a list of existing point groups.<br>
               <b>Create New:</b> A textbox will appear to enter the name of the point group.</td>
@@ -112,13 +126,13 @@
             <th scope="col" style="width: 70%;">Description</th>
           </thead>
           <tr>
-            <th scope="row">Linework will come into the drawing as</th>
+            <th scope="row">Linework will come into the drawing as <span class="badge text-bg-warning">Planned Feature</span></th>
             <td><b>2D Linework:</b> The linework will come in as 2D polylines. Arcs will be defined as such. All linework will be at elevation 0.000’.<br>
               <b>3D Linework:</b> The linework will come in as 3D polylines. Each vertex will be elevated to the source point’s elevation. Arcs will be subtended holding a mid-ordinate distance of 0.500’ feet horizontally and elevations prorated between vertexes.<br>
               <b>Feature lines:</b> The linework will come in as Civil 3D feature lines. Each vertex will be elevated to the source point’s elevation and elevation points inserted along curves as required.</td>
           </tr>
           <tr>
-            <th scope="row">Consider all points in drawing when processing</th>
+            <th scope="row">Consider all points in drawing when processing <span class="badge text-bg-warning">Planned Feature</span></th>
             <td>The processor will include point numbers of existing points when creating linework. Useful for when “JOIN” commands reference outside point numbers.</td>
           </tr>
         </table>
@@ -214,5 +228,9 @@
   </div>
   <!-- Copyright -->
 </footer>
+<script>
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 <!-- Footer -->
 </html>
