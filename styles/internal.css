@@ -1,0 +1,26 @@
+.autocad-command {
+  /* background-color: var(--bs-secondary); */
+  border: 1px solid;
+  /* color: var(--bs-white); */
+  padding: 0.125rem 0.5rem;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  /* background-color: white; */
+  /* color: black; */
+  font-weight: 500;
+}
+
+p {
+  padding-top: .5rem;
+}
+
+button.list-group-item {
+  position: relative;
+  display: block;
+  padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+  color: var(--bs-list-group-color);
+  text-decoration: none;
+  background-color: var(--bs-list-group-bg);
+  border: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color) !important;
+}

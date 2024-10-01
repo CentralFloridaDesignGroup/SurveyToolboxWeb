@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="../../styles/internal.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="../../scripts/bootstrap_setcolormode.js"></script>
+</head>
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary d-print-none">
+  <div class="container-lg">
+    <ul class="navbar-nav"><li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+       Documentation
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="../../index.html">Civil 3D Plugin</a></li>
+      </ul>
+    </li></ul>
+  </div>
+</nav>
+
+<body>
+  <div class="container-lg my-2">
+    <h1 class="text-center">Import JXL File</h1>
+    <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" 
+    class="bg-body-tertiary p-2 px-3 border rounded">
+      <ol class="breadcrumb p-0 m-0">
+        <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+        <li class="breadcrumb-item">Commands</li>
+        <li class="breadcrumb-item"><a href="importIndex.html">Import</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Import JXL File</li>
+      </ol>
+    </nav>
+    <div>
+      <p>The <span class="autocad-command">ImportJxlFile</span> command allows the technician to directly import Trimble&copy; raw data file. The technician will then be able to do a multitude of tasks with minimal input, including:</p>
+      <ul>
+        <li>Points</li>
+        <ul>
+          <li>Create points based off raw data and assign more values into the point's properties.</li>
+          <li>Resolve conflicting data for points both internally (such as multiple measurements for one point) and externally (point number already existing in Civil 3D).</li>
+          <li>Automatically assign points to layers based off detected FXL file.</li>
+          <li>Automatically create blocks and place blocks on points, independent of point styles.</li>
+        </ul>
+        <li>Linework</li>
+        <ul>
+          <li>Automatically process field measurements and create 2D linework, 3D linework, or feature lines.</li>
+          <li>Provide a Field-to-Finish (F2F) report, giving the technician a starting point for reviewing data.</li>
+          <li>Data will reference all points within drawing, including previously imported points.</li>
+        </ul>
+        <li>Surface</li>
+        <ul>
+          <li>Automatically create a preliminary surface based off definitions from a detected FXL file.</li>
+          <li>If the linework is created as feature lines, the feature lines will automatically be imported into the surface.</li>
+        </ul>
+      </ul>
+    </div>
+    <div>
+      <h3>Operation</h3>
+      <p>Once the command is activated, the technician will select a .jxl file. Currently, only one can be processed at a time. Once the technician accepts the file, the options dialog will be opened. This dialog allows the technician to modify the import workflow, add tasks, or remove tasks, as desired.</p>
+      <img src="../../img/jxl_import_full.png" class="rounded mx-auto d-block" style="width: 40%;" alt="Import trimble jxl file dialog.">
+      <div class="pt-3">
+        <h5>Point Import Options</h5>
+        <table class="table">
+          <thead>
+            <th scope="col" style="width: 30%;">Command</th>
+            <th scope="col" style="width: 70%;">Description</th>
+          </thead>
+          <tr>
+            <th scope="row">Import points from JXL file</th>
+            <td>Allows the technician to either enable or disable point creation from the JXL file.</td>
+          </tr>
+          <tr>
+            <th scope="row">Replace raw code with attributes next to each code</th>
+            <td>If enabled, the attributes measured in the field will be added directly after the code. For example, a point with the code BLDG1 OHG will be imported as “BLDG1 (CBS 1) OHG.” The raw code will still be available in the point properties.</td>
+          </tr>
+          <tr>
+            <th scope="row">Assign points to layers based on detected FXL files</th>
+            <td>If enabled, the points will be assigned to layers based on the FXL indicated as active in the JXL file. If the layer does not exist in the current drawing, information from the FXL file will be used to create the layer.</td>
+          </tr>
+          <tr>
+            <th scope="row">Add blocks onto each point based on detected FXL files</th>
+            <td>If enabled, each point with a definable block will get said block created on top of, but not connected to, the point. If the block does not exist in the drawing, the program will search through the block inventory database to determine if a block can be imported. If a block cannot be imported, this will be communicated in the import report generated at the end of the process.</td>
+          </tr>
+          <tr>
+            <th scope="row">Do you want to put the imported points into a group</th>
+            <td><b>No Point Group:</b> No point group will be created.<br>
+              <b>Add to Existing:</b> A combo box will appear with a list of existing point groups.<br>
+              <b>Create New:</b> A textbox will appear to enter the name of the point group.</td>
+          </tr>
+        </table>
+        <div class="row justify-content-between">
+          <div class="col-12 col-lg-6">
+            <img src="../../img/jxl_add_to_existing.png" class="rounded float-start" alt="Zoom in of the dialog showing the 'Add to existing' option" style="max-width: 100%;">
+            <p>Example of &quot;Add to Existing&quot; popup.</p>
+          </div>
+          <div class="col-12 col-lg-6">
+            <img src="../../img/jxl_create_new.png" class="rounded float-end" alt="Zoom in of the dialog showing the 'Add to existing' option" style="max-width: 100%;">
+            <p>Example of &quot;Create New&quot; popup.</p>
+          </div>
+        </div>
+      </div>
+      <div class="pt-3">
+        <h5>Linework Import Options</h5>
+        <table class="table">
+          <thead>
+            <th scope="col" style="width: 30%;">Command</th>
+            <th scope="col" style="width: 70%;">Description</th>
+          </thead>
+          <tr>
+            <th scope="row">Linework will come into the drawing as</th>
+            <td><b>2D Linework:</b> The linework will come in as 2D polylines. Arcs will be defined as such. All linework will be at elevation 0.000’.<br>
+              <b>3D Linework:</b> The linework will come in as 3D polylines. Each vertex will be elevated to the source point’s elevation. Arcs will be subtended holding a mid-ordinate distance of 0.500’ feet horizontally and elevations prorated between vertexes.<br>
+              <b>Feature lines:</b> The linework will come in as Civil 3D feature lines. Each vertex will be elevated to the source point’s elevation and elevation points inserted along curves as required.</td>
+          </tr>
+          <tr>
+            <th scope="row">Consider all points in drawing when processing</th>
+            <td>The processor will include point numbers of existing points when creating linework. Useful for when “JOIN” commands reference outside point numbers.</td>
+          </tr>
+        </table>
+      </div>
+      <div class="pt-3">
+        <h5>Bottom Options</h5>
+        <table class="table">
+          <thead>
+            <th scope="col" style="width: 30%;">Button</th>
+            <th scope="col" style="width: 70%;">Description</th>
+          </thead>
+          <tr>
+            <th scope="row">Help</th>
+            <td>Opens this help page URL in your preferred browser.</td>
+          </tr>
+          <tr>
+            <th scope="row">Continue</th>
+            <td>Accepts the options as you have set and begins processing.</td>
+          </tr>
+          <tr>
+            <th scope="row">Cancel</th>
+            <td>Cancels the command without processing anything.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- Footer -->
+<footer class="text-center bg-body-tertiary mt-auto d-print-none">
+  <!-- Section: Social media -->
+  
+  <!-- Section: Links  -->
+  <section class="p-2">
+    <div class="container text-center text-md-start">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="fs-5 fw-bold mb-4">
+            Central Florida Design Group
+          </h6>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Products
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Surveyor Toolbox (AutoCAD Plugin)</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+          </h6>
+          <p>
+            <a href="../../index.html" class="text-reset">Documentation Home</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 d-none">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            info@example.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+          <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2024 Copyright: <b>Central Florida Deisgn Group, LLC</b>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+</html>
